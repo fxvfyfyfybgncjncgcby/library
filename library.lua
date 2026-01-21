@@ -274,9 +274,9 @@ function GitanX:CreateWindow(config)
     })
     
     -- Modern accent line
-    local AccentLine = CreateInstance("Frame", {
-        Name = "AccentLine",
-        Size = UDim2.new(1, 0, 0, 3),
+local AccentLine = CreateInstance("Frame", {
+    Name = "AccentLine",
+    Size = UDim2.new(1, 0, 0, 2),  -- Plus fin (2 au lieu de 3)
         Position = UDim2.new(0, 0, 1, -3),
         BackgroundColor3 = Theme.Primary,
         BorderSizePixel = 0,
@@ -391,31 +391,38 @@ function GitanX:CreateWindow(config)
     
 local TabsContainer = CreateInstance("ScrollingFrame", {
     Name = "TabsContainer",
-    Size = UDim2.new(1, -10, 1, -80),  -- Réduit pour laisser place au profil
+    Size = UDim2.new(1, -10, 1, -90),  -- Réduit pour faire place au profil
     Position = UDim2.new(0, 5, 0, 5),
         BackgroundTransparency = 1,
         ScrollBarThickness = 0,
         BorderSizePixel = 0,
         Parent = Sidebar,
     })
-    -- Profil utilisateur en bas
+-- === PROFIL UTILISATEUR EN BAS ===
 local PlayerProfile = CreateInstance("Frame", {
     Name = "PlayerProfile",
-    Size = UDim2.new(1, -10, 0, 65),
-    Position = UDim2.new(0, 5, 1, -70),
-    BackgroundColor3 = Theme.SurfaceLight,
+    Size = UDim2.new(1, -10, 0, 70),
+    Position = UDim2.new(0, 5, 1, -75),
+    BackgroundColor3 = Theme.Surface,
     BorderSizePixel = 0,
     Parent = Sidebar,
 })
 
 CreateInstance("UICorner", {
-    CornerRadius = UDim.new(0, 10),
+    CornerRadius = UDim.new(0, 12),
     Parent = PlayerProfile,
 })
 
--- Avatar du joueur
+CreateInstance("UIStroke", {
+    Color = Theme.Border,
+    Transparency = 0.7,
+    Thickness = 1,
+    Parent = PlayerProfile,
+})
+
+-- Avatar circulaire
 local PlayerAvatar = CreateInstance("ImageLabel", {
-    Size = UDim2.new(0, 45, 0, 45),
+    Size = UDim2.new(0, 50, 0, 50),
     Position = UDim2.new(0, 10, 0, 10),
     BackgroundColor3 = Theme.Primary,
     Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.UserId .. "&width=150&height=150&format=png",
@@ -430,28 +437,28 @@ CreateInstance("UICorner", {
 
 CreateInstance("UIStroke", {
     Color = Theme.Primary,
-    Thickness = 2,
+    Thickness = 3,
     Parent = PlayerAvatar,
 })
 
 -- Nom du joueur
 local PlayerName = CreateInstance("TextLabel", {
-    Size = UDim2.new(1, -70, 0, 20),
-    Position = UDim2.new(0, 60, 0, 12),
+    Size = UDim2.new(1, -75, 0, 22),
+    Position = UDim2.new(0, 68, 0, 10),
     BackgroundTransparency = 1,
     Text = game.Players.LocalPlayer.Name,
     TextColor3 = Theme.Text,
-    TextSize = 14,
+    TextSize = 15,
     Font = Enum.Font.GothamBold,
     TextXAlignment = Enum.TextXAlignment.Left,
     TextTruncate = Enum.TextTruncate.AtEnd,
     Parent = PlayerProfile,
 })
 
--- DisplayName du joueur
+-- DisplayName
 local PlayerDisplay = CreateInstance("TextLabel", {
-    Size = UDim2.new(1, -70, 0, 15),
-    Position = UDim2.new(0, 60, 0, 35),
+    Size = UDim2.new(1, -75, 0, 18),
+    Position = UDim2.new(0, 68, 0, 35),
     BackgroundTransparency = 1,
     Text = "@" .. game.Players.LocalPlayer.DisplayName,
     TextColor3 = Theme.TextSecondary,
@@ -461,11 +468,6 @@ local PlayerDisplay = CreateInstance("TextLabel", {
     TextTruncate = Enum.TextTruncate.AtEnd,
     Parent = PlayerProfile,
 })
-    CreateInstance("UIListLayout", {
-        SortOrder = Enum.SortOrder.LayoutOrder,
-        Padding = UDim.new(0, 6),
-        Parent = TabsContainer,
-    })
     
     -- Modern content area
     local ContentContainer = CreateInstance("Frame", {
@@ -602,11 +604,11 @@ local PlayerDisplay = CreateInstance("TextLabel", {
         local Tab = {}
         Tab.Elements = {}
         
-        local TabButton = CreateInstance("TextButton", {
-            Name = TabName,
-            Size = UDim2.new(1, 0, 0, 45),
-            BackgroundColor3 = Theme.SurfaceLight,
-            BackgroundTransparency = 1,
+local TabButton = CreateInstance("TextButton", {
+    Name = TabName,
+    Size = UDim2.new(1, 0, 0, 45),
+    BackgroundColor3 = Theme.Surface,  -- CHANGE LA COULEUR
+    BackgroundTransparency = 0.5,  -- Met 0.5 au lieu de 1
             BorderSizePixel = 0,
             Text = "",
             Parent = TabsContainer,
@@ -617,9 +619,9 @@ local PlayerDisplay = CreateInstance("TextLabel", {
             Parent = TabButton,
         })
         
-        local TabIndicator = CreateInstance("Frame", {
-            Size = UDim2.new(0, 3, 0, 0),
-            Position = UDim2.new(0, 0, 0.5, 0),
+local TabIndicator = CreateInstance("Frame", {
+    Size = UDim2.new(0, 4, 0, 0),  -- Plus épais (4 au lieu de 3)
+    Position = UDim2.new(0, 0, 0.5, 0),
             AnchorPoint = Vector2.new(0, 0.5),
             BackgroundColor3 = Theme.Primary,
             BorderSizePixel = 0,
