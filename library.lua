@@ -79,9 +79,9 @@ end
 
 -- Enhanced Theme System (Luna-inspired)
 local Themes = {
-    Dark = {
-        Primary = Color3.fromRGB(138, 43, 226),
-        Secondary = Color3.fromRGB(75, 0, 130),
+Dark = {
+    Primary = Color3.fromRGB(255, 107, 53),     -- Orange
+    Secondary = Color3.fromRGB(255, 68, 68),    -- Rouge
         Background = Color3.fromRGB(18, 18, 22),
         Surface = Color3.fromRGB(28, 28, 35),
         SurfaceLight = Color3.fromRGB(38, 38, 48),
@@ -389,16 +389,78 @@ function GitanX:CreateWindow(config)
         Parent = Sidebar,
     })
     
-    local TabsContainer = CreateInstance("ScrollingFrame", {
-        Name = "TabsContainer",
-        Size = UDim2.new(1, -10, 1, -10),
-        Position = UDim2.new(0, 5, 0, 5),
+local TabsContainer = CreateInstance("ScrollingFrame", {
+    Name = "TabsContainer",
+    Size = UDim2.new(1, -10, 1, -80),  -- Réduit pour laisser place au profil
+    Position = UDim2.new(0, 5, 0, 5),
         BackgroundTransparency = 1,
         ScrollBarThickness = 0,
         BorderSizePixel = 0,
         Parent = Sidebar,
     })
-    
+    -- Profil utilisateur en bas
+local PlayerProfile = CreateInstance("Frame", {
+    Name = "PlayerProfile",
+    Size = UDim2.new(1, -10, 0, 65),
+    Position = UDim2.new(0, 5, 1, -70),
+    BackgroundColor3 = Theme.SurfaceLight,
+    BorderSizePixel = 0,
+    Parent = Sidebar,
+})
+
+CreateInstance("UICorner", {
+    CornerRadius = UDim.new(0, 10),
+    Parent = PlayerProfile,
+})
+
+-- Avatar du joueur
+local PlayerAvatar = CreateInstance("ImageLabel", {
+    Size = UDim2.new(0, 45, 0, 45),
+    Position = UDim2.new(0, 10, 0, 10),
+    BackgroundColor3 = Theme.Primary,
+    Image = "https://www.roblox.com/headshot-thumbnail/image?userId=" .. game.Players.LocalPlayer.UserId .. "&width=150&height=150&format=png",
+    BorderSizePixel = 0,
+    Parent = PlayerProfile,
+})
+
+CreateInstance("UICorner", {
+    CornerRadius = UDim.new(1, 0),
+    Parent = PlayerAvatar,
+})
+
+CreateInstance("UIStroke", {
+    Color = Theme.Primary,
+    Thickness = 2,
+    Parent = PlayerAvatar,
+})
+
+-- Nom du joueur
+local PlayerName = CreateInstance("TextLabel", {
+    Size = UDim2.new(1, -70, 0, 20),
+    Position = UDim2.new(0, 60, 0, 12),
+    BackgroundTransparency = 1,
+    Text = game.Players.LocalPlayer.Name,
+    TextColor3 = Theme.Text,
+    TextSize = 14,
+    Font = Enum.Font.GothamBold,
+    TextXAlignment = Enum.TextXAlignment.Left,
+    TextTruncate = Enum.TextTruncate.AtEnd,
+    Parent = PlayerProfile,
+})
+
+-- DisplayName du joueur
+local PlayerDisplay = CreateInstance("TextLabel", {
+    Size = UDim2.new(1, -70, 0, 15),
+    Position = UDim2.new(0, 60, 0, 35),
+    BackgroundTransparency = 1,
+    Text = "@" .. game.Players.LocalPlayer.DisplayName,
+    TextColor3 = Theme.TextSecondary,
+    TextSize = 12,
+    Font = Enum.Font.Gotham,
+    TextXAlignment = Enum.TextXAlignment.Left,
+    TextTruncate = Enum.TextTruncate.AtEnd,
+    Parent = PlayerProfile,
+})
     CreateInstance("UIListLayout", {
         SortOrder = Enum.SortOrder.LayoutOrder,
         Padding = UDim.new(0, 6),
