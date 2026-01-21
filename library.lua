@@ -8,7 +8,7 @@
     
     GitanX - Premium UI Library for Roblox
     Version: 2.0.0
-    Style: Luna-Inspired Modern Design
+    Style: Luna-Inspired Modern 
 ]]
 
 local GitanX = {}
